@@ -1,0 +1,49 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.home-page-navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.home-page-navigation a {
+    width: 400px;
+    margin: 10px;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 12px;
+    border: solid 2px #000;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: color .3s ease-in-out, border-color .3s ease-in-out;
+}
+.home-page-navigation a:hover {
+    color: #0d6efd;
+    border-color: #0d6efd!important;
+}
+
+input[type="submit"] {
+    margin: 20px 0;
+}
+
+.delete-link {
+    filter: hue-rotate(120deg);
+}

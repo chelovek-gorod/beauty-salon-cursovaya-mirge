@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BeautySalon.Models.Service>
+
+@{
+    ViewData["Title"] = "Услуги";
+}
+
+<h1>Услуги</h1>
+
+<p>
+    <a asp-action="Create">Добавить услугу</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th style="font-weight: 500; color: #777777;">Управление данными</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ServiceID">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.ServiceID">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.ServiceID" class="delete-link">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

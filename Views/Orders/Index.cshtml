@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BeautySalon.Models.Order>
+
+@{
+    ViewData["Title"] = "Заказы";
+    decimal sum = 0;
+}
+
+<h1>Заказы</h1>
+
+<p>
+    <a asp-action="Create">Добавить заказ</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service)
+            </th>
+            <th>
+                Стоимость
+            </th>
+            <th style="font-weight: 500; color: #777777;">Управление данными</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Service.ServiceName)
+            </td>
+            <td>
+                @{sum = sum + item.Service.Price;}
+                @Html.DisplayFor(modelItem => item.Service.Price)
+
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OrderID">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.OrderID">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.OrderID" class="delete-link">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div style="font-size: 1.2em; margin-bottom: 50px">Сумма всех заказов = <b>@sum</b> Br</div>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BeautySalon.Models.Schedule>
+
+@{
+    ViewData["Title"] = "График работ";
+}
+
+<h1>График работ</h1>
+
+<p>
+    <a asp-action="Create">Добавить новую запись</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduleDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shift)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee)
+            </th>
+            <th style="font-weight: 500; color: #777777;">Управление данными</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shift)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.FullName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ScheduleID">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.ScheduleID">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.ScheduleID" class="delete-link">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
