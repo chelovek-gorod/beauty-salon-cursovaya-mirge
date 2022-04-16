@@ -21,12 +21,6 @@ namespace BeautySalon.Controllers
         }
 
         // GET: Clients
-        /*
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Client.ToListAsync());
-        }
-        */
         public async Task<IActionResult> Index(string searchString)
         {
             var clients = from cl in _context.Client

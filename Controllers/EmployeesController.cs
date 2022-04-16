@@ -21,19 +21,9 @@ namespace BeautySalon.Controllers
         }
 
         // GET: Employees
-        /*
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Employee.ToListAsync());
-        }
-
-        from Views Employee Index
-        <!--@model IEnumerable<BeautySalon.Models.Employee>-->
-        */
-
         public async Task<IActionResult> Index(string employeePosition, string searchString)
         {
-            // Use LINQ to get list of genres.
+            // Use LINQ to get list of Employees.
             IQueryable<string> genreQuery = from emp in _context.Employee
                                             orderby emp.Position
                                             select emp.Position;
@@ -58,8 +48,6 @@ namespace BeautySalon.Controllers
 
             return View(employeePositionVM);
         }
-
-        /**/
 
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)

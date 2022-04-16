@@ -21,9 +21,20 @@ namespace BeautySalon.Controllers
         }
 
         // GET: Orders
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(DateTime OrdersFrom, DateTime OrdersTo)
         {
-            var beautySalonContext = _context.Order.Include(o => o.Client).Include(o => o.Employee).Include(o => o.Service);
+            DateTime zeroDate = new DateTime(0001, 1, 1, 0, 0, 0);
+            
+            var orders = from ord in _context.Order
+                         select ord;
+
+            if (OrdersFrom <= OrdersTo && OrdersTo > zeroDate)
+            {
+                orders = orders.Where(ord => ord.OrderDate <= OrdersTo && ord.OrderDate >= OrdersFrom);
+            }
+
+            var beautySalonContext = orders.Include(o => o.Client).Include(o => o.Employee).Include(o => o.Service);
+
             return View(await beautySalonContext.ToListAsync());
         }
 

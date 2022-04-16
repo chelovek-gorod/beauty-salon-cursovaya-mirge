@@ -7,6 +7,17 @@
 
 <h1>Заказы</h1>
 
+<form asp-controller="Orders" asp-action="Index" method="get">
+    <p>
+        Заказы с: <input style="margin-right: 10px;" type="date" name="OrdersFrom" />
+        по: <input type="date" name="OrdersTo" />
+        <input type="submit" value="Отобрать" />
+        <a style="margin-left:20px" asp-action="Index">Сбросить результаты поиска</a>
+    </p>
+</form>
+
+<div style="font-size: 1.2em; margin-bottom: 20px">Сумма всех заказов = <b id="ordersSum">@sum</b> Br</div>
+
 <p>
     <a asp-action="Create">Добавить заказ</a>
 </p>
@@ -62,4 +73,19 @@
     </tbody>
 </table>
 
-<div style="font-size: 1.2em; margin-bottom: 50px">Сумма всех заказов = <b>@sum</b> Br</div>
+<div id="sumCounter" style="display: none">@sum</div>
+
+<script>
+    // update orders Sum
+    document.getElementById('ordersSum').innerHTML = document.getElementById('sumCounter').innerHTML;
+
+    // update inputs Orders from and Orders to
+    const queryString = new URLSearchParams(window.location.search);
+    let OrdersFrom = queryString.get('OrdersFrom');
+    let OrdersTo = queryString.get('OrdersTo');
+
+    if (OrdersTo && OrdersTo >= OrdersFrom) {
+        document.querySelector('input[name="OrdersTo"]').value = OrdersTo;
+        if (OrdersFrom) document.querySelector('input[name="OrdersFrom"]').value = OrdersFrom;
+    }
+</script>
